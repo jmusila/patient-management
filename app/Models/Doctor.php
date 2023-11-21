@@ -14,6 +14,8 @@ class Doctor extends Model
 
     protected $guarded = [];
 
+    public const DEFAULT_RELATIONS = ['user'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

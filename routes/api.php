@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\UserController;
@@ -25,4 +26,5 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', UserController::class)->except('store');
     Route::apiResource('patients', PatientController::class);
     Route::apiResource('receptionists', ReceptionistController::class);
+    Route::apiResource('doctors', DoctorController::class);
 });
