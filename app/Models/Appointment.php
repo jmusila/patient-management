@@ -14,6 +14,8 @@ class Appointment extends Model
 
     protected $guarded = [];
 
+    public const DEFAULT_RELATIONS = ['user', 'notes'];
+
     public function notes(): HasMany
     {
         return $this->hasMany(AppointmentNote::class, 'appointment_id', 'id');
