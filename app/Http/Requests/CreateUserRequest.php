@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateUserRequest extends FormRequest
 {
@@ -29,8 +30,8 @@ class CreateUserRequest extends FormRequest
             'middle_name' => ['nullable', 'string'],
             'phone_number' => ['required', 'string', 'unique:users,phone_number'],
             'national_id_number' => ['required', 'string', 'unique:users,national_id_number'],
-            'type' => ['required', 'string'],
-            'gender' => ['required', 'string'],
+            'type' => ['required', 'string', Rule::in(config('validators.account_type'))],
+            'gender' => ['required', 'string', Rule::in(config('validators.gender'))],
             'address' => ['nullable', 'string'],
             'date_of_birth' => ['required', 'date'],
         ];

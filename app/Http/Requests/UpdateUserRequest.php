@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -30,7 +31,7 @@ class UpdateUserRequest extends FormRequest
             'middle_name' => ['filled', 'string'],
             'phone_number' => ['filled', 'string', 'unique:users,phone_number,' . $user->id],
             'national_id_number' => ['filled', 'string', 'unique:users,national_id_number,' . $user->id],
-            'gender' => ['filled', 'string'],
+            'gender' => ['filled', 'string', Rule::in(config('validators.gender'))],
             'address' => ['filled', 'string'],
             'date_of_birth' => ['filled', 'date'],
         ];
