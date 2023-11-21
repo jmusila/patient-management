@@ -25,5 +25,8 @@ return [
         "delete_patient_information",
         "book_an_appointment_for_a_patient",
         "confirm_patient",
-    ]
+    ],
+
+    Roles::USER => [],
+    Roles::PATIENT => [],
 ];

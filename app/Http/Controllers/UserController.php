@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        return new UserResource($user);
+        return new UserResource($user->load(User::DEFAULT_RELATIONSHIPS));
     }
 
     public function show(): UserResource
@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         $user->update($request->validated());
 
-        return new UserResource($user);
+        return new UserResource($user->load(User::DEFAULT_RELATIONSHIPS));
     }
 
     public function destroy(User $user): Response

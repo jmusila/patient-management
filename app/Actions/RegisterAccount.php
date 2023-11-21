@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Enums\Roles;
 use App\Enums\Statuses;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ class RegisterAccount
 {
     public function registerAccount(Request $request)
     {
+        $role = $this->appendRole($request);
+
         $password = $request->password;
 
         $hashedPass = Hash::make($password);
@@ -20,6 +23,8 @@ class RegisterAccount
         $data = array_merge($userData, ['password' => $hashedPass, 'status' => Statuses::ACTIVE->value]);
 
         $user = User::create($data);
+
+        $user->assignRole($role);
 
         return $user;
     }
@@ -37,5 +42,23 @@ class RegisterAccount
             "password",
             "type",
         ]);
+    }
+
+    protected function appendRole(Request $request)
+    {
+        if ($request->has("role")) {
+            if ($request->type == "patient") {
+                return Roles::PATIENT;
+            }
+            if ($request->type == "doctor") {
+                return Roles::DOCTOR;
+            }
+            if ($request->type == "receptionist") {
+                return Roles::RECEPTIONIST;
+            }
+            if ($request->type == "user") {
+                return Roles::USER;
+            }
+        }
     }
 }

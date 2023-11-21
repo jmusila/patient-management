@@ -9,4 +9,8 @@ class Roles
     public const DOCTOR = "Doctor";
 
     public const RECEPTIONIST = "Receptionist";
+
+    public const PATIENT = "Patient";
+
+    public const USER = "Patient";
 }
