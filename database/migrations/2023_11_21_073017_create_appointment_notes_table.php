@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Appointment;
 use App\Models\AppointmentNote;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
