@@ -34,6 +34,8 @@ class CreateUserRequest extends FormRequest
             'gender' => ['required', 'string', Rule::in(config('validators.gender'))],
             'address' => ['nullable', 'string'],
             'date_of_birth' => ['required', 'date'],
+            'roles' => ['array', 'filled'],
+            'roles.*' => ['integer', 'exists:roles,id'],
         ];
     }
 }

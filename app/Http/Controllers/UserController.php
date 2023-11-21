@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\RegisterAccount;
 use App\Enums\Statuses;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -22,13 +23,7 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request): UserResource
     {
-        $password = $request->password;
-
-        $hashedPass = Hash::make($password);
-
-        $data = array_merge($request->validated(), ['password' => $hashedPass, 'status' => Statuses::ACTIVE->value]);
-
-        $user = User::create($data);
+        $user = (new RegisterAccount())->registerAccount($request);
 
         return new UserResource($user->load(User::DEFAULT_RELATIONSHIPS));
     }
