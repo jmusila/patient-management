@@ -6,7 +6,6 @@ use App\Http\Requests\CreateAppointmentNoteRequest;
 use App\Http\Requests\UpdateAppointmentNoteRequest;
 use App\Http\Resources\AppointmentNoteResource;
 use App\Models\AppointmentNote;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
