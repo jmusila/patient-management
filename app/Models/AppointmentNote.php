@@ -14,6 +14,8 @@ class AppointmentNote extends Model
 
     protected $guarded = [];
 
+    public const DEFAULT_RELATIONS = ['appointment'];
+
     public function appointment(): BelongsTo
     {
         return $this->belongsTo(Appointment::class);
