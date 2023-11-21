@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'user_id');
             $table->string('patient_number');
             $table->string('patient_type');
-            $table->string('appoval_status');
+            $table->string('approval_status');
             $table->string('emergency_contact');
             $table->date('first_visit_date');
             $table->softDeletes();
