@@ -44,6 +44,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public const  DEFAULT_RELATIONSHIPS = [
+        'patient', 
+        'doctor',
+        'receptionist'
+    ];
+
     public function patient(): BelongsTo
     {
         return $this->belongsTo(Patient::class);
