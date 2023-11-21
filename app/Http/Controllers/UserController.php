@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Statuses;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
@@ -25,7 +26,7 @@ class UserController extends Controller
 
         $hashedPass = Hash::make($password);
 
-        $data = array_merge($request->validated(), ['password' => $hashedPass]);
+        $data = array_merge($request->validated(), ['password' => $hashedPass, 'status' => Statuses::ACTIVE->value]);
 
         $user = User::create($data);
 
