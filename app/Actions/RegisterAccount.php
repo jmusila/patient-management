@@ -15,10 +15,27 @@ class RegisterAccount
 
         $hashedPass = Hash::make($password);
 
-        $data = array_merge($request->validated(), ['password' => $hashedPass, 'status' => Statuses::ACTIVE->value]);
+        $userData = $this->userOnlyData($request);
+
+        $data = array_merge($userData, ['password' => $hashedPass, 'status' => Statuses::ACTIVE->value]);
 
         $user = User::create($data);
 
         return $user;
+    }
+
+    protected function userOnlyData(Request $request)
+    {
+        return $request->only([
+            "first_name",
+            "last_name",
+            "email",
+            "date_of_birth",
+            "gender",
+            "phone_number",
+            "national_id_number",
+            "password",
+            "type",
+        ]);
     }
 }
