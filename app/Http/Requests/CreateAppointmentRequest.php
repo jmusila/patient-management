@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 
 class CreateAppointmentRequest extends FormRequest
 {
@@ -22,8 +23,16 @@ class CreateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "start_date" => ["required", "date"],
-            "end_date" => ["required_with:start_date", "date"],
+            "start_date" => ["required", "date_format:Y-m-d H:i"],
+            "end_date" => [
+                "required", "date_format:Y-m-d H:i", function ($attribute, $value, $fail) {
+                    $startAt = Carbon::parse($this->input('start_date'));
+                    $endAt = Carbon::parse($value);
+                    if ($endAt->lte($startAt) || ! $endAt->isSameDay($startAt)) {
+                        $fail('The end date must be a time after start date.');
+                    }
+                },
+            ],
             "visit_reason" => ["required", "string"],
             "reception_notes" => ["filled", "string"],
             "patient_id" => ["required", "integer", "exists:patients,id"],
