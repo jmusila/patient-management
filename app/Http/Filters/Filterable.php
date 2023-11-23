@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait Filterable
 {
-    protected static function apply(Builder $query, $filter, $value): void
+    protected static function applyFilter(Builder $query, $filter, $value)
     {
-        $method = 'filterBy' . ucfirst($filter);
-        if (method_exists($query, $method)) {
+        $method = 'filterBy' . underscoreToCamelCase($filter);
+        if (method_exists(static::class, $method)) {
             static::$method($query, $value);
         }
     }
 
-    public static function applyFilters(Builder $query, array $filters): void
+    public static function applyFilters(Builder $query, array $filters)
     {
         foreach ($filters as $filter => $value) {
-            static::apply($query, $filter, $value);
+            static::applyFilter($query, $filter, $value);
         }
+    }
+
+    public static function applyTo(Builder $query, array $filters)
+    {
+        static::applyFilters($query, $filters);
     }
 }

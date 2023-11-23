@@ -9,3 +9,10 @@ if (! function_exists("generatePatientNumber")) {
         return $randomNumber;
     }
 }
+
+if (! function_exists('underscoreToCamelCase')) {
+    function underscoreToCamelCase($str)
+    {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $str))));
+    }
+}

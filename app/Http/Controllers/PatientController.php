@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Actions\RegisterAccount;
+use App\Http\Filters\PatientFilter;
 use App\Http\Requests\CreatePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Http\Resources\PatientResource;
 use App\Models\Patient;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class PatientController extends Controller
 {
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return PatientResource::collection(Patient::with(Patient::DEFAULT_RELATIONS)->get());
+        $patients = Patient::with(Patient::DEFAULT_RELATIONS);
+
+        PatientFilter::applyTo($patients, PatientFilter::filters($request));
+
+        return PatientResource::collection($patients->get());
     }
 
     public function show(Patient $patient): PatientResource

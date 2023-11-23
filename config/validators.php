@@ -2,5 +2,5 @@
 
 return [
     'gender' => ['male', 'female', 'other'],
-    'account_type' => ['receptionist', 'doctor', 'user'],
+    'account_type' => ['receptionist', 'doctor', 'user', 'patient'],
 ];
