@@ -10,3 +10,15 @@
 - Run `php artisan app:initialize-test-environment`
 - Create a user using the endpoint    `{base_url}/api/users` POST method
 
+- List of Routes:
+
++--------+----------+----------------------+
+|        | Method   | URI                  | 
++--------+----------+----------------------+
+|        | POST     | oauth/token          | 
+|        | POST     | api/user/create      | 
+|        | GET      | api/users            | 
+|        | PUT/PATCH| api/users/{user}     | 
+|        | DELETE   | api/users/{user}     | 
+|        | DELETE   | web/route/{route}    |
++--------+----------+----------------------+
