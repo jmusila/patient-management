@@ -27,6 +27,7 @@ class CreateAppointmentRequest extends FormRequest
             "visit_reason" => ["required", "string"],
             "reception_notes" => ["filled", "string"],
             "patient_id" => ["required", "integer", "exists:patients,id"],
+            "doctor_id" => ["required", "integer", "exists:doctors,id"],
         ];
     }
 }

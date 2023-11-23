@@ -25,7 +25,7 @@ class CreateDoctorRequest extends FormRequest
         return [
             'license_number' => ['required', 'string'],
             'specialization' => ['required', 'string'],
-            'date_of_hire' => ['required', 'string'],
+            'date_of_hire' => ['required', 'date'],
             'title' => ['required', 'string'],
             'experience_years' => ['filled', 'string'],
             'short_bio'=> ['filled', 'string'],

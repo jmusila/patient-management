@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAppointmentNoteRequest;
 use App\Http\Requests\UpdateAppointmentNoteRequest;
 use App\Http\Resources\AppointmentNoteResource;
+use App\Http\Resources\AppointmentResource;
 use App\Models\AppointmentNote;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -23,7 +24,7 @@ class AppointmentNoteController extends Controller
         return new AppointmentNoteResource($appointment->load(AppointmentNote::DEFAULT_RELATIONS));
     }
 
-    public function update(UpdateAppointmentNoteRequest $request, AppointmentNote $appointmentNote): AppointmentResource
+    public function update(UpdateAppointmentNoteRequest $request, AppointmentNote $appointmentNote): AppointmentNoteResource
     {
         $appointmentNote->update($request->validated());
 
