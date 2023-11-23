@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('experience_years');
             $table->text('short_bio')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

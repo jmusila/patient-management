@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Appointment::class, 'appointment_id');
             $table->text('notes');
             $table->text('prescriptions')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
