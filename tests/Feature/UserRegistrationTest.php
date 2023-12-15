@@ -30,6 +30,8 @@ class UserRegistrationTest extends TestCase
 
     public function testItCannotRegisterUserWithExistingEmail()
     {
+        $this->withoutMiddleware();
+        
         User::factory()->create(['email' => 'test@email.com']);
 
         $newUser = User::factory()->make(['email' => 'test@email.com'])->toArray();
