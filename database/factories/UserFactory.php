@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\AccountTypes;
+use App\Enums\Statuses;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -21,10 +23,19 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'first_name' => fake()->firstName(),
+            'middle_name' => ucfirst(fake()->randomLetter()),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
+            'phone_number' => fake()->unique()->e164PhoneNumber(),
+            'national_id_number' => (string) random_int(1000, 9999),
+            'type' => fake()->randomElement([AccountTypes::DOCTOR->value, AccountTypes::RECEPTIONIST->value, AccountTypes::PATIENT->value, AccountTypes::USER->value]),
+            'gender' => fake()->randomElement(['male', 'female', 'other']),
+            'status' => Statuses::ACTIVE->value,
+            'address' => fake()->address(),
+            'date_of_birth' => fake()->date('Y-m-d H:i:s'),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => 'password',
             'remember_token' => Str::random(10),
         ];
     }

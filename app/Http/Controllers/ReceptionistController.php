@@ -26,7 +26,7 @@ class ReceptionistController extends Controller
 
     public function store(CreateReceptionistRequest $request): ReceptionistResource
     {
-        $user = (new RegisterAccount())->registerAccount($request);
+        $user = (new RegisterAccount())->registerAccount($request->validated());
 
         $receptionistData = $request->only(['date_of_hire', 'supervisor']);
 

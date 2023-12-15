@@ -31,7 +31,7 @@ class PatientController extends Controller
 
     public function store(CreatePatientRequest $request): PatientResource
     {
-        $user = (new RegisterAccount())->registerAccount($request);
+        $user = (new RegisterAccount())->registerAccount($request->validated());
 
         $patientData = $request->only(['patient_type', 'approval_status', 'emergency_contact']);
 

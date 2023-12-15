@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request): UserResource
     {
-        $user = (new RegisterAccount())->registerAccount($request);
+        $user = (new RegisterAccount())->registerAccount($request->validated());
 
         return new UserResource($user->load(User::DEFAULT_RELATIONSHIPS));
     }

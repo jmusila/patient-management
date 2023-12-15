@@ -24,7 +24,7 @@ class DoctorController extends Controller
 
     public function store(CreateDoctorRequest $request): DoctorResource
     {
-        $user = (new RegisterAccount())->registerAccount($request);
+        $user = (new RegisterAccount())->registerAccount($request->validated());
 
         $doctorData = $request->only([
             'license_number', 
