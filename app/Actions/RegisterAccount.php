@@ -13,24 +13,20 @@ class RegisterAccount
 {
     public function registerAccount(Request $request)
     {
-        $roles = $request->roles;
+        $hashedPassword = Hash::make($request->password);
 
-        $password = $request->password;
+        $userData = $this->userRequestData($request);
 
-        $hashedPass = Hash::make($password);
-
-        $userData = $this->userOnlyData($request);
-
-        $data = array_merge($userData, ['password' => $hashedPass, 'status' => Statuses::ACTIVE->value]);
+        $data = array_merge($userData, ['password' => $hashedPassword, 'status' => Statuses::ACTIVE->value]);
 
         $user = User::create($data);
-
-        $user->assignRole($roles);
+        
+        $user->assignRole($request->roles);
 
         return $user;
     }
 
-    protected function userOnlyData(Request $request)
+    protected function userRequestData(Request $request)
     {
         return $request->only([
             "first_name",
